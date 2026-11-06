@@ -8,6 +8,9 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  # Les PR ouvertes par l'agent (GITHUB_TOKEN) ne déclenchent pas `pull_request` :
+  # agent-implement.yml lance ce workflow explicitement sur leur branche.
+  workflow_dispatch:
 
 jobs:
   build:
