@@ -43,3 +43,7 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+## Workflow agentique
+
+Les issues servent de specs : un agent Claude (GitHub Actions) les raffine, les implémente une par une contre l’app qui tourne et ouvre une PR à relire. Voir [docs/agentic-workflow.md](docs/agentic-workflow.md).

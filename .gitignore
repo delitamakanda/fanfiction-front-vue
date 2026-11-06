@@ -28,3 +28,6 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Sorties des agents (base SQLite jetable, backend cloné, captures)
+.agent-out/
