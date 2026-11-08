@@ -8,7 +8,7 @@ const props = defineProps<{
 
 const error = ref({
   code: 500,
-  msg: 'Ops, something went wrong!'
+  msg: 'Ops, something went wrong!',
 })
 
 if (props.isCustomError) {

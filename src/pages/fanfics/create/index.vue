@@ -1,11 +1,5 @@
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
+<template>create fanfics</template>
 
-<template>
-  create fanfics
-</template>
-
-<style scoped>
-
-</style>
+<style scoped></style>

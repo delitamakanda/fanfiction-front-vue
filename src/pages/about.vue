@@ -3,7 +3,7 @@ useMeta({
   title: 'About',
   meta: [
     { name: 'description', content: 'About this website' },
-    { name: 'keywords', content: 'about, website' }
+    { name: 'keywords', content: 'about, website' },
   ],
 })
 usePageStore().pageData.title = `About`

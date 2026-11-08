@@ -4,7 +4,6 @@ import { fetchHealthCheck } from '@/utils/apiHealth'
 import { validateCache } from './helper'
 import { useMemoize } from '@vueuse/core'
 
-
 export const useHealthStore = defineStore('health-store', () => {
   const healthCheck = ref<HealthCheck | null>(null)
   const loadHealthCheck = useMemoize(async () => await fetchHealthCheck())
@@ -30,5 +29,4 @@ export const useHealthStore = defineStore('health-store', () => {
     healthCheck,
     getHealthCheck,
   }
-
 })

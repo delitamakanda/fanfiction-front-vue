@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { user, profile } = useAuthStore()
+const { user } = useAuthStore()
+const profile = user?.profile
 usePageStore().pageData.title = `${user?.username}'s Profile`
 import { formatDate } from '@/utils/formatDates.ts'
 </script>
@@ -14,7 +15,9 @@ import { formatDate } from '@/utils/formatDates.ts'
 
       <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
         <dt class="font-medium text-gray-900 dark:text-white">Date joined</dt>
-        <dd class="text-gray-700 sm:col-span-2 dark:text-gray-200">{{ formatDate(user?.date_joined) }}</dd>
+        <dd class="text-gray-700 sm:col-span-2 dark:text-gray-200">
+          {{ formatDate(user?.date_joined) }}
+        </dd>
       </div>
 
       <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">

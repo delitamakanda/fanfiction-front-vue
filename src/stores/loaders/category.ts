@@ -6,12 +6,8 @@ import { validateCache } from './helper'
 export const useCategoryStore = defineStore('category-store', () => {
   const categories = ref<Category[] | null>(null)
   const subcategories = ref<Subcategory[] | null>(null)
-  const loadCategories = useMemoize(
-    async () => await fetchCategories(),
-  )
-  const loadSubcategories = useMemoize(
-    async () => await fetchSubcategories(),
-  )
+  const loadCategories = useMemoize(async () => await fetchCategories())
+  const loadSubcategories = useMemoize(async () => await fetchSubcategories())
 
   const getCategories = async () => {
     categories.value = null
@@ -42,7 +38,7 @@ export const useCategoryStore = defineStore('category-store', () => {
     validateCache({
       ref: subcategories,
       query: fetchSubcategories,
-      key:'subcategories',
+      key: 'subcategories',
       loaderFn: loadSubcategories,
     })
   }

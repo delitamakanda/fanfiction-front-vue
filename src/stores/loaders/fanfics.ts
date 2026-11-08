@@ -6,9 +6,7 @@ import { validateCache } from './helper'
 export const useFanficsStore = defineStore('fanfics-store', () => {
   const fanfics = ref<Fanfic[] | null>(null)
   const fanfic = ref<Fanfic | null>(null)
-  const loadFanfics = useMemoize(
-    async (params = {}) => await fetchFanfics(params || {}),
-  )
+  const loadFanfics = useMemoize(async (params = {}) => await fetchFanfics(params || {}))
   const loadFanfic = useMemoize(async (slug: string) => await fetchFanfic(slug))
 
   const getFanfics = async (params = {}) => {

@@ -4,7 +4,13 @@ export const useErrorStore = defineStore('error-store', () => {
   const activeError = ref<null | CustomError>(null)
   const isCustomError = ref(false)
 
-  const setError = ({ error, customCode}: {error: string | Error | CustomError, customCode?: number}) => {
+  const setError = ({
+    error,
+    customCode,
+  }: {
+    error: string | Error | CustomError
+    customCode?: number
+  }) => {
     if (typeof error === 'string') {
       isCustomError.value = true
       activeError.value = Error(error) as CustomError

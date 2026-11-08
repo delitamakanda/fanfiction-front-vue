@@ -12,23 +12,17 @@ await getPostBySlug(slug)
   <div class="flex flex-col justify-center items-center">
     <Table v-if="post">
       <TableRow>
-        <TableHead>
-          Title
-        </TableHead>
+        <TableHead> Title </TableHead>
         <TableCell>{{ post.title }}</TableCell>
       </TableRow>
       <TableRow>
-        <TableHead>
-          Content
-        </TableHead>
+        <TableHead> Content </TableHead>
         <TableCell>
           <div v-html="post.content"></div>
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableHead>
-          Date
-        </TableHead>
+        <TableHead> Date </TableHead>
         <TableCell>{{ formatDate(post.created) }}</TableCell>
       </TableRow>
     </Table>

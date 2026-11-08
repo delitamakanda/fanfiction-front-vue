@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 
-const { profile } = storeToRefs(useAuthStore())
+const { user } = storeToRefs(useAuthStore())
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -24,14 +24,14 @@ const toggleDark = useToggle(isDark)
         </Transition>
       </Button>
       <div class="w-8">
-        <DropdownMenu v-if="profile">
+        <DropdownMenu v-if="user">
           <DropdownMenuTrigger>
             <Avatar>
               <AvatarImage
-                :src="profile.photo || ''"
-                :alt="`${profile.user.username} profile picture`"
+                :src="user.profile?.photo || ''"
+                :alt="`${user.username} profile picture`"
               />
-              <AvatarFallback>{{ profile?.user?.username.charAt(0).toUpperCase() }}</AvatarFallback>
+              <AvatarFallback>{{ user.username.charAt(0).toUpperCase() }}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -41,7 +41,7 @@ const toggleDark = useToggle(isDark)
               <RouterLink
                 :to="{
                   name: '/users/[username]',
-                  params: { username: profile.user.username },
+                  params: { username: user.username },
                 }"
                 class="w-full h-full"
               >

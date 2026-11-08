@@ -6,9 +6,7 @@ import { validateCache } from './helper'
 export const usePostsStore = defineStore('posts-store', () => {
   const posts = ref<Post[] | null>(null)
   const post = ref<Post | null>(null)
-  const loadPosts = useMemoize(
-    async () => await fetchPosts(),
-  )
+  const loadPosts = useMemoize(async () => await fetchPosts())
   const loadPost = useMemoize(async (slug: string) => await fetchPostBySlug(slug))
 
   const getPosts = async () => {
@@ -43,7 +41,6 @@ export const usePostsStore = defineStore('posts-store', () => {
       key: slug,
       loaderFn: loadPost,
     })
-
   }
 
   return {
@@ -52,5 +49,4 @@ export const usePostsStore = defineStore('posts-store', () => {
     getPosts,
     getPostBySlug,
   }
-
 })

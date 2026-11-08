@@ -4,14 +4,15 @@ import { useCycleList } from '@vueuse/core'
 import { getImageUrl } from '@/utils/imageUrl'
 
 const props = defineProps<{
-  elements: Array<any>;
+  elements: Array<any>
 }>()
 
 const imageLogicValueMapping = computed(() => {
-  return props.elements.map(element => ({ ...element, image: getImageUrl(`categories/${element.logic_value}`)  }))
+  return props.elements.map((element) => ({
+    ...element,
+    image: getImageUrl(`categories/${element.logic_value}`),
+  }))
 })
-
-
 
 const { state, prev, next } = useCycleList(imageLogicValueMapping.value)
 </script>
@@ -22,7 +23,7 @@ const { state, prev, next } = useCycleList(imageLogicValueMapping.value)
       <img :src="state.image" :alt="state.name" :key="state.slug" />
     </transition>
   </div>
-  <p>{{state.name}}</p>
+  <p>{{ state.name }}</p>
   <p v-if="state.description">{{ state.description }}</p>
   <ButtonLoader @click="prev()">Previous</ButtonLoader>
   <ButtonLoader @click="next()">Next</ButtonLoader>

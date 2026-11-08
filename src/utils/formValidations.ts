@@ -23,7 +23,9 @@ export const validatePassword = (password: string) => {
 
   const isPasswordValid = passwordRegex.test(password)
   if (!isPasswordValid) {
-    errors.push('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character')
+    errors.push(
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+    )
   }
 
   if (password.length < 8) {
@@ -33,9 +35,8 @@ export const validatePassword = (password: string) => {
 }
 
 export const validateConfirmPassword = (password: string, confirmPassword: string) => {
-  if (confirmPassword!== password) {
+  if (confirmPassword !== password) {
     return ['Passwords do not match']
   }
   return []
 }
-

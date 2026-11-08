@@ -18,14 +18,19 @@ export const useAuthStore = defineStore('auth-store', () => {
     if (hasFetchedSession.value) {
       return
     }
-    if(sessionRequest.value) {
+    if (sessionRequest.value) {
       await sessionRequest.value
       return
     }
     sessionRequest.value = (async () => {
-      if (window.localStorage.getItem('access_token') && window.localStorage.getItem('refresh_token')) {
-        if (!user.value ) {
-          const { data: { user } } = await axiosClient.get<{ user: User}>('/v1/accounts/user/')
+      if (
+        window.localStorage.getItem('access_token') &&
+        window.localStorage.getItem('refresh_token')
+      ) {
+        if (!user.value) {
+          const {
+            data: { user },
+          } = await axiosClient.get<{ user: User }>('/v1/accounts/user/')
           if (user) {
             console.log('user fetched from API: ', user)
             await setAuth(<User>user)

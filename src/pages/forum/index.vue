@@ -1,9 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    Forum
-  </div>
+  <div>Forum</div>
 </template>
 
 <style scoped></style>

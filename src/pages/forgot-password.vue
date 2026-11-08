@@ -29,8 +29,13 @@ const handleSubmit = async () => {
         <form class="grid gap-4" @submit.prevent="handleSubmit">
           <div class="grid gap-2">
             <Label for="email" class="text-left">Email</Label>
-            <Input id="email" v-model="formData.email" type="email" :class="{'border-red-500': serverError }" required />
-
+            <Input
+              id="email"
+              v-model="formData.email"
+              type="email"
+              :class="{ 'border-red-500': serverError }"
+              required
+            />
           </div>
           <ul class="text-sm text-left text-red-500" v-if="realtimeErrors">
             <li v-for="(error, idx) in realtimeErrors" :key="idx">{{ error }}</li>
@@ -38,9 +43,7 @@ const handleSubmit = async () => {
           <ul class="text-sm text-left text-red-500" v-if="serverError">
             <li class="list-disc">{{ serverError }}</li>
           </ul>
-          <Button type="submit" class="w-full">
-            Reset Password
-          </Button>
+          <Button type="submit" class="w-full"> Reset Password </Button>
         </form>
       </CardContent>
     </Card>

@@ -23,14 +23,12 @@ watchDebounced(
   },
 )
 
-await getLexique({ q: formData.value.search  })
+await getLexique({ q: formData.value.search })
 </script>
 <template>
   <RouterLink to="/help/faq">FAQ</RouterLink>
   <input v-model="formData.search" placeholder="Search lexique" />
   <div v-if="lexique">
-    <div v-for="item in lexique" :key="item.id">
-      {{ item.title }} - {{item.definition}}
-      </div>
+    <div v-for="item in lexique" :key="item.id">{{ item.title }} - {{ item.definition }}</div>
   </div>
 </template>

@@ -5,7 +5,7 @@ type FormErrors<T> = {
 }
 
 interface ErrorResponse {
-  response?: { data?: { detail?: string, email?: string[] } }
+  response?: { data?: { detail?: string; email?: string[] } }
 }
 
 export const useFormErrors = () => {
@@ -13,7 +13,7 @@ export const useFormErrors = () => {
   const realtimeErrors = ref<FormErrors<LoginForm>>()
 
   const handleServerError = (error: unknown) => {
-    if (typeof error === 'object' && error!== null) {
+    if (typeof error === 'object' && error !== null) {
       const errorResponse = error as ErrorResponse
       if (errorResponse?.response?.data?.detail) {
         serverError.value = errorResponse.response.data.detail
@@ -23,7 +23,6 @@ export const useFormErrors = () => {
         serverError.value = 'An unexpected error occurred'
       }
     }
-
   }
   const handleLoginForm = async (form: LoginForm) => {
     realtimeErrors.value = {
