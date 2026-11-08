@@ -39,6 +39,15 @@ describe('Carousel', () => {
     expect(wrapper.text()).not.toContain('Histoires de coeur')
   })
 
+  it('exposes French accessible labels on the buttons', () => {
+    const buttons = mountCarousel().findAll('button')
+
+    expect(buttons[0].attributes('aria-label')).toBe('Catégorie précédente')
+    expect(buttons[0].text()).toBe('Précédent')
+    expect(buttons[1].attributes('aria-label')).toBe('Catégorie suivante')
+    expect(buttons[1].text()).toBe('Suivant')
+  })
+
   it('wraps around to the last element when going back from the first', async () => {
     const wrapper = mountCarousel()
 

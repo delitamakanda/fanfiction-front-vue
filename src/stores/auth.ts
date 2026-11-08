@@ -15,7 +15,9 @@ export const useAuthStore = defineStore('auth-store', () => {
   }
 
   const getSession = async () => {
-    if (hasFetchedSession.value) {
+    // Une session déjà résolue n'est rechargée que si des tokens sont apparus depuis (connexion
+    // après une visite anonyme, ex. depuis l'accueil public).
+    if (hasFetchedSession.value && (user.value || !window.localStorage.getItem('access_token'))) {
       return
     }
     if (sessionRequest.value) {

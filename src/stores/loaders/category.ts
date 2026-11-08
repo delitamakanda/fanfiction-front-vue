@@ -9,20 +9,28 @@ export const useCategoryStore = defineStore('category-store', () => {
   const loadCategories = useMemoize(async () => await fetchCategories())
   const loadSubcategories = useMemoize(async () => await fetchSubcategories())
 
+  const categoriesError = ref(false)
+
+  // Les catégories ne sont pas vitales : une erreur est exposée localement
+  // (categoriesError) sans remplacer la page par AppErrorPage.
   const getCategories = async () => {
     categories.value = null
-    const { data, error, status } = await loadCategories()
-    if (error) {
-      useErrorStore().setError({ error: error as Error, customCode: status })
-    }
-    if (data) {
-      categories.value = data
+    categoriesError.value = false
+    try {
+      const { data } = await loadCategories()
+      if (data) {
+        categories.value = data
+      }
+    } catch {
+      loadCategories.clear()
+      categoriesError.value = true
+      return
     }
     validateCache({
       ref: categories,
-      query: fetchCategories,
+      query: () => fetchCategories().catch(() => ({ data: null, error: true })),
       key: 'categories',
-      loaderFn: loadCategories,
+      loaderFn: { delete: () => loadCategories.clear() },
     })
   }
 
@@ -45,6 +53,7 @@ export const useCategoryStore = defineStore('category-store', () => {
 
   return {
     categories,
+    categoriesError,
     subcategories,
     getCategories,
     getSubcategories,
