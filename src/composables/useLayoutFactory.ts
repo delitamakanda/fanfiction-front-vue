@@ -1,30 +1,24 @@
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
 
-export const useLayoutFactory = ({
-    layoutComponents,
-    LAYOUTS,
-    defaultLayout,
-}: any) => {
-    const layout = ref(defaultLayout);
+export const useLayoutFactory = ({ layoutComponents, LAYOUTS, defaultLayout }: any) => {
+  const layout = ref(defaultLayout)
 
-    const currentLayoutComponent = computed(
-        () => layoutComponents[layout.value],
-    );
+  const currentLayoutComponent = computed(() => layoutComponents[layout.value])
 
-    const setLayout = (layoutType: any) => {
-        layout.value = layoutType;
-    };
+  const setLayout = (layoutType: any) => {
+    layout.value = layoutType
+  }
 
-    const useLayout = () => {
-        return {
-            currentLayoutComponent,
-            layout,
-            setLayout,
-            LAYOUTS,
-        };
-    };
-
+  const useLayout = () => {
     return {
-        useLayout,
-    };
-};
+      currentLayoutComponent,
+      layout,
+      setLayout,
+      LAYOUTS,
+    }
+  }
+
+  return {
+    useLayout,
+  }
+}

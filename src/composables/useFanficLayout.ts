@@ -1,27 +1,23 @@
-import { layoutFactory } from '@/helpers/layoutFactory';
-import FanficLayoutComponent from '@/components/FanficLayout.vue';
-import GridLayout from '@/components/GridLayout.vue';
-import ListLayout from '@/components/ListLayout.vue';
+import { layoutFactory } from '@/helpers/layoutFactory'
+import FanficLayoutComponent from '@/components/FanficLayout.vue'
+import GridLayout from '@/components/GridLayout.vue'
+import ListLayout from '@/components/ListLayout.vue'
 
 const LAYOUTS = {
-    grid: Symbol('grid'),
-    list: Symbol('list'),
-};
-
-const layoutComponents = {
-    [LAYOUTS.grid]: GridLayout,
-    [LAYOUTS.list]: ListLayout,
+  grid: Symbol('grid'),
+  list: Symbol('list'),
 }
 
+const layoutComponents = {
+  [LAYOUTS.grid]: GridLayout,
+  [LAYOUTS.list]: ListLayout,
+}
 
-const {
-    LayoutComponent: FanficLayout,
-    useLayout: useFanficLayout
-} : any = layoutFactory({
-    LayoutComponent: FanficLayoutComponent,
-    layoutComponents,
-    LAYOUTS,
-    defaultLayout: LAYOUTS.grid
-});
+const { LayoutComponent: FanficLayout, useLayout: useFanficLayout }: any = layoutFactory({
+  LayoutComponent: FanficLayoutComponent,
+  layoutComponents,
+  LAYOUTS,
+  defaultLayout: LAYOUTS.grid,
+})
 
-export { FanficLayout, useFanficLayout, LAYOUTS };
+export { FanficLayout, useFanficLayout, LAYOUTS }

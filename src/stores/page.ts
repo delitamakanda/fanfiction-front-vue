@@ -1,9 +1,9 @@
 export const usePageStore = defineStore('page-store', () => {
   const pageData = ref({
-    title: ''
+    title: '',
   })
   return {
-    pageData
+    pageData,
   }
 })
 

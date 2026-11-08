@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 type StatusCardProps = {
   title: string
-  status: 'idle' | 'loading' | 'error' | 'ok'
+  status: 'idle' | 'loading' | 'error' | 'success'
   description: string
 }
 const props = defineProps<StatusCardProps>()
@@ -15,7 +15,7 @@ const statusLabel = computed(() => {
       return 'Loading...'
     case 'error':
       return 'Error'
-    case 'ok':
+    case 'success':
       return 'Success'
     default:
       return 'Ready'
@@ -65,5 +65,4 @@ const statusClass = computed(() => `status ${props.status}`)
   background: #fee2e2;
   color: #b91c1c;
 }
-
 </style>

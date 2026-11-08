@@ -22,7 +22,7 @@ watchDebounced(
 )
 
 const signIn = async () => {
-  const { error } = await login(formData.value) as { error: never }
+  const { error } = (await login(formData.value)) as { error: never }
   if (!error) {
     await router.push('/')
   } else {
@@ -58,7 +58,9 @@ const signIn = async () => {
           <div class="grid gap-2">
             <div class="flex items-center">
               <Label id="password">Password</Label>
-              <RouterLink to="/forgot-password" class="inline-block ml-auto text-xs underline"> Forgot your password? </RouterLink>
+              <RouterLink to="/forgot-password" class="inline-block ml-auto text-xs underline">
+                Forgot your password?
+              </RouterLink>
             </div>
             <Input
               id="password"

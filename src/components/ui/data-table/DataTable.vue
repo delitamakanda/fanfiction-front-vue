@@ -14,7 +14,7 @@ const table = useVueTable({
   get columns() {
     return props.columns
   },
-  getCoreRowModel: getCoreRowModel()
+  getCoreRowModel: getCoreRowModel(),
 })
 </script>
 

@@ -4,7 +4,7 @@ import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from 'radix-v
 usePageStore().pageData.title = 'FAQ'
 const helpLoader = useHelpStore()
 const { faqs } = storeToRefs(helpLoader)
-const {  getFaqs } = helpLoader
+const { getFaqs } = helpLoader
 
 await getFaqs()
 </script>
@@ -14,6 +14,6 @@ await getFaqs()
     <CollapsibleRoot v-for="faq in faqs" :key="faq.id">
       <CollapsibleTrigger>{{ faq.question }}</CollapsibleTrigger>
       <CollapsibleContent>{{ faq.reponse }}</CollapsibleContent>
-      </CollapsibleRoot>
+    </CollapsibleRoot>
   </div>
 </template>

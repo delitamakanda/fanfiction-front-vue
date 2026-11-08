@@ -1,24 +1,20 @@
 <template>
-    <component :is="currentLayoutComponent">
-        <template
-            v-for="slotName in Object.keys($slots)"
-            :key="slotName"
-            v-slot:[slotName]="slotProps"
-        >
-            <slot :name="slotName" :layout="layout" v-bind="slotProps"></slot>
-        </template>
-    </component>
+  <component :is="currentLayoutComponent">
+    <template v-for="slotName in Object.keys($slots)" :key="slotName" v-slot:[slotName]="slotProps">
+      <slot :name="slotName" :layout="layout" v-bind="slotProps"></slot>
+    </template>
+  </component>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 const props = defineProps({
   useLayout: {
     type: Function,
-    required: true
+    required: true,
   },
-});
+})
 
-const { layout, currentLayoutComponent } = props.useLayout();
+const { layout, currentLayoutComponent } = props.useLayout()
 </script>

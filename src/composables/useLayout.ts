@@ -1,20 +1,20 @@
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 export const LAYOUTS = {
-    standard: Symbol('standard'),
-    auth: Symbol('auth'),
-};
+  standard: Symbol('standard'),
+  auth: Symbol('auth'),
+}
 
-const layout = ref(LAYOUTS.standard);
+const layout = ref(LAYOUTS.standard)
 
-const setLayout = (layoutType) => {
-    layout.value = layoutType;
-};
+const setLayout = (layoutType: symbol) => {
+  layout.value = layoutType
+}
 
 export const useLayout = () => {
-    return {
-        layout,
-        setLayout,
-        LAYOUTS,
-    }
-};
+  return {
+    layout,
+    setLayout,
+    LAYOUTS,
+  }
+}

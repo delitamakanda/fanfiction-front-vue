@@ -1,10 +1,10 @@
 import axiosClient from '@/lib/axiosClient'
 
 export interface HealthCheck {
-  status: string;
-  timestamp: string;
-  service: string;
-  version: string;
+  status: string
+  timestamp: string
+  service: string
+  version: string
 }
 
 export const fetchHealthCheck = async () => {

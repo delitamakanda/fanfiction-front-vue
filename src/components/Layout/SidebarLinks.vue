@@ -32,11 +32,9 @@ const { menuOpen } = inject(menuKey) as MenuInjectionOptions
       :class="{ 'justify-normal': menuOpen, 'justify-center': !menuOpen }"
     >
       <iconify-icon :icon="link.icon"></iconify-icon>
-      <span
-        class="text-nowrap"
-        :class="{ block: menuOpen, hidden: !menuOpen }"
-        >{{ link.title }}</span
-      >
+      <span class="text-nowrap" :class="{ block: menuOpen, hidden: !menuOpen }">{{
+        link.title
+      }}</span>
     </RouterLink>
 
     <div
@@ -46,11 +44,9 @@ const { menuOpen } = inject(menuKey) as MenuInjectionOptions
       @click="emitActionClicked(link.title)"
     >
       <iconify-icon :icon="link.icon"></iconify-icon>
-      <span
-        class="text-nowrap"
-        :class="{ block: menuOpen, hidden: !menuOpen }"
-        >{{ link.title }}</span
-      >
+      <span class="text-nowrap" :class="{ block: menuOpen, hidden: !menuOpen }">{{
+        link.title
+      }}</span>
     </div>
   </template>
 </template>

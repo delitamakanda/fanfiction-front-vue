@@ -1,20 +1,20 @@
 <template>
   <RouterLink :to="`fanfics/${fanfic.slug}`">
-  <div class="fanficGridCard">
-    <p class="font-semibold text-lg mb-2">{{ fanfic.title }}</p>
-    <div class="flex justify-between items-center mt-auto">
-      <p class="text-gray-500">{{ fanfic.category }}</p>
-      <p>{{ fanfic.author }}</p>
+    <div class="fanficGridCard">
+      <p class="font-semibold text-lg mb-2">{{ fanfic.title }}</p>
+      <div class="flex justify-between items-center mt-auto">
+        <p class="text-gray-500">{{ fanfic.category }}</p>
+        <p>{{ fanfic.author }}</p>
+      </div>
     </div>
-  </div>
   </RouterLink>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 import type { Fanfic } from '@/utils/apiFanfics.ts'
 
-defineProps<{ fanfic: Fanfic }>();
+defineProps<{ fanfic: Fanfic }>()
 </script>
 
 <style>

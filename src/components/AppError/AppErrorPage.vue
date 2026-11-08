@@ -19,9 +19,9 @@ if (error.value && !('code' in error.value)) {
 
 if (error.value && 'code' in error.value) {
   message.value = error.value.message
-  details.value = error.value.details
-  hint.value = error.value.hint
-  code.value = error.value.code
+  details.value = error.value.details ?? ''
+  hint.value = error.value.hint ?? ''
+  code.value = error.value.code ?? ''
   statusCode.value = error.value.statusCode ?? 0
 }
 

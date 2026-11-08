@@ -1,19 +1,21 @@
-interface ValidateCacheParams<T,Q, K> {
+import type { Ref } from 'vue'
+
+interface ValidateCacheParams<T, Q, K> {
   ref: Ref<T | null>
   query: Q
   key: K
-  loaderFn: (...args: any[]) => Promise<any>
+  loaderFn: { delete: (key: K) => void }
 }
 
-export const validateCache = <T,Q, K>({
+export const validateCache = <T, Q, K>({
   ref,
   query,
   key,
   loaderFn,
-}: ValidateCacheParams<T,Q, K>) => {
+}: ValidateCacheParams<T, Q, K>) => {
   if (ref.value) {
-    const finalQuery = typeof query === 'function'? query(key) : query
-    finalQuery.then(({ data, error }: {data: T, error: any }) => {
+    const finalQuery = typeof query === 'function' ? query(key) : query
+    finalQuery.then(({ data, error }: { data: T; error: any }) => {
       if (JSON.stringify(ref.value) === JSON.stringify(data)) {
         return
       } else {

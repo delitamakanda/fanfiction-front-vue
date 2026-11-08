@@ -3,13 +3,10 @@ const formData = ref({
   username: '',
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
 })
 
-const errors = ref({})
-
-import { register} from '@/utils/apiAuth'
-import { validateEmail, validatePassword, validateConfirmPassword } from '@/utils/formValidations'
+import { register } from '@/utils/apiAuth'
 const router = useRouter()
 
 const signup = async () => {
@@ -35,13 +32,7 @@ const signup = async () => {
         <form class="grid gap-4" @submit.prevent="signup">
           <div class="grid gap-2">
             <Label id="username" class="text-left">Username</Label>
-            <Input
-              id="username"
-              type="text"
-              placeholder=""
-              required
-              v-model="formData.username"
-            />
+            <Input id="username" type="text" placeholder="" required v-model="formData.username" />
           </div>
           <div class="grid gap-2">
             <Label id="email" class="text-left">Email</Label>
