@@ -18,8 +18,19 @@ export default [
   ...vueTsEslintConfig(),
   {
     rules: {
-      'vue/multi-word-component-names': 0
-    }
+      'vue/multi-word-component-names': 0,
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { ignoreRestSiblings: true, argsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
+    name: 'app/commonjs',
+    files: ['**/*.cjs'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
   },
   {
     ...pluginVitest.configs.recommended,
