@@ -15,7 +15,7 @@ export const validateCache = <T, Q, K>({
 }: ValidateCacheParams<T, Q, K>) => {
   if (ref.value) {
     const finalQuery = typeof query === 'function' ? query(key) : query
-    finalQuery.then(({ data, error }: { data: T; error: any }) => {
+    finalQuery.then(({ data, error }: { data: T; error: unknown }) => {
       if (JSON.stringify(ref.value) === JSON.stringify(data)) {
         return
       } else {

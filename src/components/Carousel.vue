@@ -2,9 +2,10 @@
 import { computed } from 'vue'
 import { useCycleList } from '@vueuse/core'
 import { getImageUrl } from '@/utils/imageUrl'
+import type { Category } from '@/utils/apiCategory'
 
 const props = defineProps<{
-  elements: Array<any>
+  elements: Category[]
 }>()
 
 const imageLogicValueMapping = computed(() => {

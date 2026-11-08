@@ -13,7 +13,7 @@ const layoutComponents = {
   [LAYOUTS.list]: ListLayout,
 }
 
-const { LayoutComponent: FanficLayout, useLayout: useFanficLayout }: any = layoutFactory({
+const { LayoutComponent: FanficLayout, useLayout: useFanficLayout } = layoutFactory({
   LayoutComponent: FanficLayoutComponent,
   layoutComponents,
   LAYOUTS,
