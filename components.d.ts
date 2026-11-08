@@ -69,6 +69,7 @@ declare module 'vue' {
     SheetTrigger: typeof import('./src/components/ui/sheet/SheetTrigger.vue')['default']
     Sidebar: typeof import('./src/components/Layout/Sidebar.vue')['default']
     SidebarLinks: typeof import('./src/components/Layout/SidebarLinks.vue')['default']
+    SkipLink: typeof import('./src/components/Layout/SkipLink.vue')['default']
     StatusCard: typeof import('./src/components/StatusCard/StatusCard.vue')['default']
     Table: typeof import('./src/components/ui/table/Table.vue')['default']
     TableBody: typeof import('./src/components/ui/table/TableBody.vue')['default']

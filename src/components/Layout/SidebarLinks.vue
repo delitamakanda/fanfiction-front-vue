@@ -31,28 +31,25 @@ const { menuOpen } = inject(menuKey) as MenuInjectionOptions
       class="nav-link"
       :class="{ 'justify-normal': menuOpen, 'justify-center': !menuOpen }"
     >
-      <iconify-icon :icon="link.icon"></iconify-icon>
-      <span class="text-nowrap" :class="{ block: menuOpen, hidden: !menuOpen }">{{
-        link.title
-      }}</span>
+      <iconify-icon :icon="link.icon" aria-hidden="true"></iconify-icon>
+      <span class="text-nowrap" :class="menuOpen ? 'block' : 'sr-only'">{{ link.title }}</span>
     </RouterLink>
 
-    <div
+    <button
       v-else
-      class="nav-link cursor-pointer"
+      type="button"
+      class="nav-link cursor-pointer w-[calc(100%-1rem)]"
       :class="{ 'justify-normal': menuOpen, 'justify-center': !menuOpen }"
       @click="emitActionClicked(link.title)"
     >
-      <iconify-icon :icon="link.icon"></iconify-icon>
-      <span class="text-nowrap" :class="{ block: menuOpen, hidden: !menuOpen }">{{
-        link.title
-      }}</span>
-    </div>
+      <iconify-icon :icon="link.icon" aria-hidden="true"></iconify-icon>
+      <span class="text-nowrap" :class="menuOpen ? 'block' : 'sr-only'">{{ link.title }}</span>
+    </button>
   </template>
 </template>
 
 <style scoped>
 .nav-link {
-  @apply flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:text-primary text-muted-foreground;
+  @apply flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:text-primary text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
 }
 </style>

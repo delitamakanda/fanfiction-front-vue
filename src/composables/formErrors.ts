@@ -20,7 +20,7 @@ export const useFormErrors = () => {
       } else if (errorResponse?.response?.data?.email?.[0]) {
         serverError.value = errorResponse.response.data.email[0]
       } else {
-        serverError.value = 'An unexpected error occurred'
+        serverError.value = 'Une erreur inattendue est survenue'
       }
     }
   }

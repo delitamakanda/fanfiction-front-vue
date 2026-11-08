@@ -4,19 +4,21 @@ import type { MenuInjectionOptions } from '@/utils/injectionKeys'
 import { useWindowSize } from '@vueuse/core'
 const { user } = storeToRefs(useAuthStore())
 
+const SIGN_OUT = 'Se déconnecter'
+
 const links = [
   {
-    title: 'Homepage',
+    title: 'Accueil',
     to: '/',
     icon: 'lucide:home',
   },
   {
-    title: 'Dashboard',
+    title: 'Tableau de bord',
     to: '/dashboard',
     icon: 'lucide:chart-bar',
   },
   {
-    title: 'All Fanfictions',
+    title: 'Toutes les fanfictions',
     to: '/fanfics',
     icon: 'lucide:book-open',
   },
@@ -30,22 +32,22 @@ const links = [
 const accountLinks = computed(() => {
   return [
     {
-      title: 'Profile',
+      title: 'Profil',
       to: `/users/${user?.value?.username}`,
       icon: 'lucide:users',
     },
     {
-      title: 'Settings',
+      title: 'Paramètres',
       to: '/settings',
       icon: 'lucide:settings',
     },
     {
-      title: 'About',
+      title: 'À propos',
       to: '/about',
       icon: 'lucide:info',
     },
     {
-      title: 'Help center',
+      title: "Centre d'aide",
       to: '/help',
       icon: 'lucide:circle-help',
     },
@@ -55,7 +57,7 @@ const accountLinks = computed(() => {
       icon: 'lucide:message-circle',
     },
     {
-      title: 'Sign Out',
+      title: SIGN_OUT,
       icon: 'lucide:log-out',
     },
   ]
@@ -64,7 +66,7 @@ const accountLinks = computed(() => {
 const router = useRouter()
 
 const executeAction = async (linkTitle: string) => {
-  if (linkTitle === 'Sign Out') {
+  if (linkTitle === SIGN_OUT) {
     const { logout } = await import('@/utils/apiAuth')
     const { isLoggedOut } = await logout()
     if (isLoggedOut) {
@@ -91,38 +93,52 @@ watchEffect(() => {
     :class="{ 'w-52': menuOpen, 'w-24': !menuOpen }"
   >
     <div class="flex h-16 items-center border-b px-2 lg:px-4 shrink-0 gap-1 justify-between">
-      <Button @click="toggleMenu" variant="outline" size="icon" class="w-8 h-8">
-        <iconify-icon icon="lucide:menu"></iconify-icon>
+      <Button
+        type="button"
+        variant="outline"
+        size="icon"
+        class="w-8 h-8"
+        :aria-label="menuOpen ? 'Réduire le menu' : 'Ouvrir le menu'"
+        :aria-expanded="menuOpen"
+        @click="toggleMenu"
+      >
+        <iconify-icon icon="lucide:menu" aria-hidden="true"></iconify-icon>
       </Button>
 
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Button variant="outline" size="icon" class="w-8 h-8">
-            <iconify-icon icon="lucide:plus"></iconify-icon>
+        <DropdownMenuTrigger as-child>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            class="w-8 h-8"
+            aria-label="Actions rapides"
+          >
+            <iconify-icon icon="lucide:plus" aria-hidden="true"></iconify-icon>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem @click="$emit('taskClicked')">
-            <RouterLink to="/fanfics/create">Create a new fanfic</RouterLink>
+          <DropdownMenuItem as-child @click="$emit('taskClicked')">
+            <RouterLink to="/fanfics/create">Créer une fanfiction</RouterLink>
           </DropdownMenuItem>
-          <DropdownMenuItem @click="$emit('taskClicked')">
-            <RouterLink to="/fanfics/manage">Manage my fanfics</RouterLink>
+          <DropdownMenuItem as-child @click="$emit('taskClicked')">
+            <RouterLink to="/fanfics/manage">Gérer mes fanfictions</RouterLink>
           </DropdownMenuItem>
-          <DropdownMenuItem @click="$emit('taskClicked')">
-            <RouterLink :to="`/accounts/${user?.username}`">Manage my profile</RouterLink>
+          <DropdownMenuItem as-child @click="$emit('taskClicked')">
+            <RouterLink :to="`/accounts/${user?.username}`">Gérer mon profil</RouterLink>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
 
-    <nav class="flex flex-col gap-2 justify-between h-full relative">
-      <div>
+    <div class="flex flex-col gap-2 justify-between h-full relative">
+      <nav aria-label="Navigation principale">
         <SidebarLinks :links="links" />
-      </div>
+      </nav>
 
-      <div class="border-y text-center bg-background py-3">
+      <nav aria-label="Compte et aide" class="border-y text-center bg-background py-3">
         <SidebarLinks :links="accountLinks" @actionClicked="executeAction" />
-      </div>
-    </nav>
+      </nav>
+    </div>
   </aside>
 </template>
