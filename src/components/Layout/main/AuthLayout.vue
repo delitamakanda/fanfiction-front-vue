@@ -13,13 +13,18 @@ provide(menuKey, {
 
 <template>
   <div>
+    <SkipLink />
     <Sidebar @taskClicked="fanficSheetOpen = true" />
     <div
       class="flex flex-col transition-[margin]"
       :class="{ 'ml-52': menuOpen, 'ml-24': !menuOpen }"
     >
       <TopNavbar />
-      <main class="flex flex-col flex-1 gap-4 p-4 lg:gap-6 lg:p-6">
+      <main
+        id="main-content"
+        tabindex="-1"
+        class="outline-none flex flex-col flex-1 gap-4 p-4 lg:gap-6 lg:p-6"
+      >
         <div class="flex items-center">
           <h1 class="text-lg font-semibold md:text-2xl">
             {{ pageData.title }}

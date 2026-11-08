@@ -8,44 +8,59 @@ const toggleDark = useToggle(isDark)
 </script>
 
 <template>
-  <nav class="h-16 border-b bg-muted/40 flex gap-2 justify-between px-6 items-center">
-    <form class="relative h-fit w-full max-w-96">
+  <nav
+    aria-label="Barre d'outils"
+    class="h-16 border-b bg-muted/40 flex gap-2 justify-between px-6 items-center"
+  >
+    <form role="search" class="relative h-fit w-full max-w-96" @submit.prevent>
       <iconify-icon
         class="absolute top-[50%] translate-y-[-50%] left-2.5 text-muted-foreground"
         icon="lucide:search"
+        aria-hidden="true"
       ></iconify-icon>
-      <Input class="w-full pl-8 bg-background" type="text" placeholder="Search ..." />
+      <Label for="site-search" class="sr-only">Rechercher</Label>
+      <Input
+        id="site-search"
+        class="w-full pl-8 bg-background"
+        type="search"
+        placeholder="Rechercher…"
+        autocomplete="off"
+      />
     </form>
     <div class="flex justify-center items-center gap-1">
-      <Button @click="toggleDark()" class="w-8 h-8">
+      <Button
+        type="button"
+        class="w-8 h-8"
+        :aria-label="isDark ? 'Passer en thème clair' : 'Passer en thème sombre'"
+        @click="toggleDark()"
+      >
         <Transition name="scale" mode="out-in">
-          <iconify-icon v-if="isDark" icon="lucide:sun"></iconify-icon>
-          <iconify-icon v-else icon="lucide:moon"></iconify-icon>
+          <iconify-icon v-if="isDark" icon="lucide:sun" aria-hidden="true"></iconify-icon>
+          <iconify-icon v-else icon="lucide:moon" aria-hidden="true"></iconify-icon>
         </Transition>
       </Button>
       <div class="w-8">
         <DropdownMenu v-if="user">
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger
+            aria-label="Menu du compte"
+            class="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
             <Avatar>
-              <AvatarImage
-                :src="user.profile?.photo || ''"
-                :alt="`${user.username} profile picture`"
-              />
+              <AvatarImage :src="user.profile?.photo || ''" alt="" />
               <AvatarFallback>{{ user.username.charAt(0).toUpperCase() }}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>Mon compte</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem as-child>
               <RouterLink
                 :to="{
                   name: '/users/[username]',
                   params: { username: user.username },
                 }"
-                class="w-full h-full"
               >
-                Profile
+                Profil
               </RouterLink>
             </DropdownMenuItem>
           </DropdownMenuContent>

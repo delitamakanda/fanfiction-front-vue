@@ -1,5 +1,8 @@
 <template>
   <div class="min-h-screen w-full sm:pt-0">
-    <slot></slot>
+    <SkipLink />
+    <main id="main-content" tabindex="-1" class="outline-none">
+      <slot></slot>
+    </main>
   </div>
 </template>
