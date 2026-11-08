@@ -1,43 +1,37 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-usePageStore().pageData.title = 'Welcome'
+usePageStore().pageData.title = 'Accueil'
+useMeta({
+  title: 'Accueil',
+  description: 'Lisez et partagez vos fanfictions préférées sur Fanfiction.',
+})
+
+const { user } = storeToRefs(useAuthStore())
 const categoryLoader = useCategoryStore()
-const healthStoreLoader = useHealthStore()
-const { categories } = storeToRefs(categoryLoader)
-const { healthCheck } = storeToRefs(healthStoreLoader)
-const { getCategories } = categoryLoader
-const { getHealthCheck } = healthStoreLoader
-import StatusCard from '@/components/StatusCard/StatusCard.vue'
+const { categories, categoriesError } = storeToRefs(categoryLoader)
+const retryLoading = ref(false)
 
-await getCategories()
-await getHealthCheck()
-
-const healthStatus = computed(() => {
-  if (healthCheck?.value?.status === 'ok') {
-    return 'success'
-  } else if (healthCheck?.value?.status === 'loading') {
-    return 'loading'
-  } else if (healthCheck?.value?.status === 'error') {
-    return 'error'
+const retryCategories = async () => {
+  retryLoading.value = true
+  try {
+    await categoryLoader.getCategories()
+  } finally {
+    retryLoading.value = false
   }
-  return 'idle'
-})
+}
 
-const healthDescription = computed(() => {
-  if (healthCheck?.value?.status) {
-    return `Status: ${healthCheck.value.status}`
-  }
-  return 'No health check data available'
-})
+await categoryLoader.getCategories()
 </script>
 
 <template>
-  <main>
-    <StatusCard title="Health API" :status="healthStatus" :description="healthDescription">
-      <template #action>
-        <button type="button">Check Health</button>
-      </template>
-    </StatusCard>
-    <Carousel v-if="categories" :elements="categories" />
-  </main>
+  <div class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 pb-8 sm:px-6">
+    <HomeHero :is-authenticated="!!user" />
+    <Carousel v-if="categories?.length" :elements="categories" />
+    <div v-else-if="categoriesError" role="alert" class="flex flex-col items-start gap-3">
+      <p>Impossible de charger les catégories pour le moment.</p>
+      <ButtonLoader type="button" :loading="retryLoading" @click="retryCategories"
+        >Réessayer</ButtonLoader
+      >
+    </div>
+    <RecentFanfics />
+  </div>
 </template>

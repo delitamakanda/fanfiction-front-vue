@@ -8,6 +8,8 @@ const props = defineProps<{
   elements: Category[]
 }>()
 
+const fallbackImage = getImageUrl('categories/empty')
+
 const imageLogicValueMapping = computed(() => {
   return props.elements.map((element) => ({
     ...element,
@@ -15,32 +17,45 @@ const imageLogicValueMapping = computed(() => {
   }))
 })
 
-const { state, prev, next } = useCycleList(imageLogicValueMapping.value)
+const { state, prev, next } = useCycleList(imageLogicValueMapping)
+
+const onImageError = (event: Event) => {
+  const img = event.target as HTMLImageElement
+  if (img.src !== fallbackImage) {
+    img.src = fallbackImage
+  }
+}
 </script>
 
 <template>
-  <div class="carousel">
-    <transition>
-      <img :src="state.image" :alt="state.name" :key="state.slug" />
-    </transition>
-  </div>
-  <p>{{ state.name }}</p>
-  <p v-if="state.description">{{ state.description }}</p>
-  <ButtonLoader @click="prev()">Previous</ButtonLoader>
-  <ButtonLoader @click="next()">Next</ButtonLoader>
+  <section aria-roledescription="carrousel" aria-label="Catégories">
+    <div class="carousel relative h-56 sm:h-96 overflow-hidden rounded-md">
+      <transition>
+        <img
+          class="absolute h-full w-full object-cover"
+          :src="state.image"
+          :alt="state.name"
+          :key="state.slug"
+          @error="onImageError"
+        />
+      </transition>
+    </div>
+    <div aria-live="polite">
+      <p class="mt-2 font-semibold">{{ state.name }}</p>
+      <p v-if="state.description">{{ state.description }}</p>
+    </div>
+    <div class="mt-2 flex gap-2">
+      <ButtonLoader type="button" aria-label="Catégorie précédente" @click="prev()"
+        >Précédent</ButtonLoader
+      >
+      <ButtonLoader type="button" aria-label="Catégorie suivante" @click="next()"
+        >Suivant</ButtonLoader
+      >
+    </div>
+  </section>
 </template>
 
 <style scoped>
-.carousel {
-  position: relative;
-  height: 400px;
-}
-img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  position: absolute;
-}
 .v-enter-active,
 .v-leave-active {
   transition: all 0.2s ease;
