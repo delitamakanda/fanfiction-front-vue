@@ -8,7 +8,7 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to, _from, next) => {
+router.beforeEach(async (to) => {
   const authStore = useAuthStore()
   const isPublicRoute = PUBLIC_ROUTES.includes(to.path)
 
@@ -17,9 +17,8 @@ router.beforeEach(async (to, _from, next) => {
   }
 
   if (!isPublicRoute && !authStore.user) {
-    return next('/login')
+    return '/login'
   }
-  return next()
 })
 
 export default router

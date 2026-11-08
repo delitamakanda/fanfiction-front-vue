@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
-import VueRouter from 'unplugin-vue-router/vite'
+import VueRouter from 'vue-router/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 
@@ -9,7 +9,7 @@ import autoprefixer from 'autoprefixer'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
-import { VueRouterAutoImports } from 'unplugin-vue-router'
+import { VueRouterAutoImports } from 'vue-router/unplugin'
 
 // https://vite.dev/config/
 export default defineConfig({
