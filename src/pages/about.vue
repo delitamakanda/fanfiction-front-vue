@@ -13,6 +13,6 @@ usePageStore().pageData.title = `About`
   <metainfo></metainfo>
 
   <div class="about">
-    <h1>This is an about page</h1>
+    <p>This is an about page</p>
   </div>
 </template>

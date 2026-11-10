@@ -43,7 +43,7 @@ const signIn = async () => {
 </script>
 
 <template>
-  <div class="mx-auto flex w-full justify-center items-center p-10 text-center -mt-20 min-h-[90vh]">
+  <div class="mx-auto flex w-full justify-center items-center py-10 text-center min-h-screen">
     <Card class="max-w-sm w-full mx-auto">
       <CardHeader>
         <h1 class="text-2xl font-semibold leading-none tracking-tight">Connexion</h1>

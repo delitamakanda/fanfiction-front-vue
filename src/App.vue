@@ -41,7 +41,7 @@ useMeta({
               <template #fallback>
                 <div
                   role="status"
-                  class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 flex justify-center items-center w-full h-screen bg-background bg-opacity-90 z-50"
+                  class="flex justify-center items-center w-full min-h-[50vh] py-16"
                 >
                   <iconify-icon
                     icon="lucide:loader-circle"

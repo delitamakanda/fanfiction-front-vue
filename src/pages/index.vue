@@ -23,7 +23,7 @@ await categoryLoader.getCategories()
 </script>
 
 <template>
-  <div class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 pb-8 sm:px-6">
+  <div class="flex w-full flex-col gap-8 pb-8">
     <HomeHero :is-authenticated="!!user" />
     <Carousel v-if="categories?.length" :elements="categories" />
     <div v-else-if="categoriesError" role="alert" class="flex flex-col items-start gap-3">

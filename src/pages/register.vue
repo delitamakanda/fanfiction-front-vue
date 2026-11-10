@@ -21,7 +21,7 @@ const signup = async () => {
 
 <template>
   <div
-    class="mx-auto w-full flex justify-center items-center p-10 text-center -mt-10 min-h-[90vh] h-full"
+    class="mx-auto w-full flex justify-center items-center py-10 text-center min-h-screen h-full"
   >
     <Card class="max-w-sm w-full mx-auto h-full">
       <CardHeader>
