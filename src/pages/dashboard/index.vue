@@ -3,5 +3,5 @@ usePageStore().pageData.title = 'Dashboard'
 </script>
 
 <template>
-  <h1>Dashboard</h1>
+  <p class="text-muted-foreground">Bienvenue sur votre tableau de bord.</p>
 </template>

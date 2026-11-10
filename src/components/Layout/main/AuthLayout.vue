@@ -12,21 +12,21 @@ provide(menuKey, {
 </script>
 
 <template>
-  <div>
+  <div class="min-w-0">
     <SkipLink />
     <Sidebar @taskClicked="fanficSheetOpen = true" />
     <div
-      class="flex flex-col transition-[margin]"
-      :class="{ 'ml-52': menuOpen, 'ml-24': !menuOpen }"
+      class="flex min-w-0 flex-col transition-[margin] motion-reduce:transition-none"
+      :class="menuOpen ? 'lg:ml-52' : 'lg:ml-24'"
     >
       <TopNavbar />
       <main
         id="main-content"
         tabindex="-1"
-        class="outline-none flex flex-col flex-1 gap-4 p-4 lg:gap-6 lg:p-6"
+        class="page-container outline-none flex flex-col flex-1 gap-4 py-4 lg:gap-6 lg:py-6"
       >
         <div class="flex items-center">
-          <h1 class="text-lg font-semibold md:text-2xl">
+          <h1>
             {{ pageData.title }}
           </h1>
         </div>

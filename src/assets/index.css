@@ -93,7 +93,36 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-base leading-relaxed text-foreground antialiased;
+  }
+  h1 {
+    @apply text-2xl font-semibold leading-tight tracking-tight md:text-3xl;
+  }
+  h2 {
+    @apply text-xl font-semibold leading-snug tracking-tight md:text-2xl;
+  }
+  h3 {
+    @apply text-lg font-semibold leading-snug;
+  }
+}
+
+@layer components {
+  /* Conteneur de contenu commun, appliqué par les layouts */
+  .page-container {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+  /* Texte long : serif, interligne confortable, ~65-75 caractères par ligne */
+  .prose-text {
+    @apply max-w-prose font-serif text-lg leading-relaxed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

@@ -29,7 +29,7 @@ const fanficCardComponent = computed(() => fanficLayoutComponents[layout.value])
     <ButtonLoader @click.prevent="setLayout(LAYOUTS.list)" :loading="false"
       ><iconify-icon icon="lucide:list"></iconify-icon
     ></ButtonLoader>
-    <FanficLayout class="mx-auto max-w-7-xl">
+    <FanficLayout>
       <template v-for="fanfic in fanfics" :key="fanfic.id">
         <component :is="fanficCardComponent" :fanfic="fanfic" />
       </template>

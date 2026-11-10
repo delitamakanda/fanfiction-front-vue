@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 
+import { menuKey } from '@/utils/injectionKeys'
+
 const { user } = storeToRefs(useAuthStore())
+const menu = inject(menuKey, null)
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
@@ -10,9 +13,21 @@ const toggleDark = useToggle(isDark)
 <template>
   <nav
     aria-label="Barre d'outils"
-    class="h-16 border-b bg-muted/40 flex gap-2 justify-between px-6 items-center"
+    class="h-16 border-b bg-muted/40 flex gap-2 justify-between px-4 sm:px-6 items-center"
   >
-    <form role="search" class="relative h-fit w-full max-w-96" @submit.prevent>
+    <Button
+      v-if="menu"
+      type="button"
+      variant="outline"
+      size="icon"
+      class="w-8 h-8 shrink-0 lg:hidden"
+      aria-label="Ouvrir le menu"
+      :aria-expanded="menu.menuOpen.value"
+      @click="menu.toggleMenu"
+    >
+      <iconify-icon icon="lucide:menu" aria-hidden="true"></iconify-icon>
+    </Button>
+    <form role="search" class="relative h-fit w-full min-w-0 max-w-96" @submit.prevent>
       <iconify-icon
         class="absolute top-[50%] translate-y-[-50%] left-2.5 text-muted-foreground"
         icon="lucide:search"
