@@ -19,7 +19,7 @@ bash scripts/agent/start-app.sh      # backend API (cloned) on :8000 + Vite on :
 
 The API base URL comes from `VITE_APP_BASE_API_URL` (e.g. `http://127.0.0.1:8000/api`); there is no committed `.env`. The backend is the Django/DRF repository `delitamakanda/fanfiction` (its CORS only accepts the origin `http://localhost:5173`, so the dev server must stay on that port and be opened via `localhost`).
 
-The codebase is **not** clean yet (≈40 ESLint errors, ≈14 vue-tsc errors, ≈85 files not Prettier-formatted, the only unit test fails). Do not fix unrelated files. `check-changed.mjs` only fails on errors in lines you added or changed, and only runs Prettier on files that were already formatted on `main` (or new ones).
+ESLint, `vue-tsc`, `npm run build` and the unit tests are clean (0 errors). Only Prettier is not: ≈85 files are not formatted yet (separate ticket). Do not fix unrelated files. `check-changed.mjs` only fails on errors in lines you added or changed, and only runs Prettier on files that were already formatted on `main` (or new ones).
 
 ## Architecture
 
@@ -33,8 +33,7 @@ Vue 3.5 + Vite 7 + TypeScript, single-page app for a bilingual fanfiction platfo
 
 ### Known issues
 
-- `npm run type-check` fails on `main` (e.g. `noUsedLocals` typo in `tsconfig.app.json`, `User` type without `id` / `profile`); `npm run build` therefore fails, CI uses `build-only`.
-- `src/components/__tests__/Carousel.spec.ts` fails on `main` (scaffold test). Unit tests are otherwise absent.
+- `src/components/__tests__/` and other `__tests__` folders are excluded from `tsconfig.app.json`, so test files are not type-checked.
 - The fanfic list relies on the backend filter `q=publié`: the API returns drafts to anonymous users otherwise.
 
 ## Conventions
